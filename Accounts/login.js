@@ -1,13 +1,14 @@
 import React from 'react'
 import {styles} from '../styles'
-import {ScrollView,Text, Image, TextInput, View, TouchableOpacity} from 'react-native'
+import {ActivityIndicator,ScrollView,Text, Image, TextInput, View, TouchableOpacity} from 'react-native'
 
 
 export default class App extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            user:NaN
+            user:NaN,
+            isloading:false,
         }
     }
 
@@ -15,6 +16,7 @@ export default class App extends React.Component{
     handlePassword = (password) => {this.setState({ password })}
     
     handleSubmit = (e) => {
+        this.setState({isloading:true})
         e.preventDefault()
         fetch('https://zuku-backend.herokuapp.com/client login', 
         { method: 'POST',
@@ -24,8 +26,8 @@ export default class App extends React.Component{
          }
         ).then(
                response => response.json()
-          ).then((data)=>data.result==="success" ? [global.user=data.user,this.props.navigation.navigate('Home')]
-          :alert("Username or password is incorrect")
+          ).then((data)=>[this.setState({isloading:false}),data.result==="success" ? [global.user=data.user,this.props.navigation.navigate('Home')]
+          :alert("Username or password is incorrect")]
           )
     };
  
@@ -38,7 +40,10 @@ export default class App extends React.Component{
             <View >
                 <ScrollView>
                 <Image source={require('../assets/zuku.jpeg')} style={{marginTop:0,width:"100%"}} />
-                <Text style={styles.heading}>Welcome to Zuku{"\n"} Please login to access your account</Text>
+                {this.state.isloading===true ?<ActivityIndicator size="large"/> :
+                <Text style={[styles.heading,{color:'white'}]}>Login in to your accounts</Text>
+                }
+                
                 <TextInput placeholder="Email"  keyboardType={'email-address'} onChangeText={this.handleEmail} style={styles.inputs} /><Text/>
                 <TextInput placeholder="Password" secureTextEntry={true} onChangeText={this.handlePassword} style={styles.inputs} /><Text/>
 
