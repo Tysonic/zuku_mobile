@@ -48,10 +48,10 @@ export default class App extends React.Component{
                 <TextInput placeholder="Password" secureTextEntry={true} onChangeText={this.handlePassword} style={styles.inputs} /><Text/>
 
                 <View style={styles.login}>
-                    <View style={styles.submitButton} >
-                    <TouchableOpacity onPress={this.handleSubmit}>
-                        <View ><Text>login</Text></View>
-                    </TouchableOpacity></View>
+                    
+                    <TouchableOpacity  style={styles.submitButton} onPress={this.handleSubmit}>
+                    <Text style={{color:'white'}}>login</Text>
+                    </TouchableOpacity>
 
                     <View style={{width: "20%", height: 50,
                                     backgroundColor: 'skyblue',
@@ -60,12 +60,20 @@ export default class App extends React.Component{
                                     justifyContent: 'center',
                                     borderRadius:25,}} ><Text>Or</Text></View>
 
-                    <View style={styles.submitButton} >
-                    <TouchableOpacity onPress={()=>this.props.navigation.navigate('Register')}>
-                    <View><Text >Sign Up</Text></View>
+                    
+                    <TouchableOpacity style={styles.submitButton}  onPress={()=>this.props.navigation.navigate('Register')}>
+                    <Text style={{color:'white'}}>Sign Up</Text>
                 </TouchableOpacity>
-                    </View>
+                    
                 </View>
+                <TouchableOpacity style={[styles.submitButton,
+                    {marginLeft:'10%',
+                    backgroundColor:'#54a9ac',
+                    borderRadius:10,
+                    marginBottom:"10%"
+                    }]}  onPress={()=>this.props.navigation.navigate('ResetPassword')}>
+                    <Text  >Forgot password</Text>
+                </TouchableOpacity>
                 </ScrollView>
             </View>
         )

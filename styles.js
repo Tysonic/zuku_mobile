@@ -43,7 +43,7 @@ export const styles = StyleSheet.create({
       marginRight:"10%",
       borderRadius:10,
       backgroundColor:"#397",
-      marginBottom:"20%"
+      marginBottom:"10%"
       
   },
 
@@ -167,7 +167,18 @@ export const styles = StyleSheet.create({
     borderWidth:10,
     alignItems:"center"},
 
-    serviceGroupText:{fontSize:30}
+    serviceGroupText:{fontSize:30},
+
+    passwordReset: {
+      borderRadius:12,
+      backgroundColor:"#397",
+      marginLeft:"25%",
+      height:50,
+      marginRight:"25%",
+      alignContent:"center",
+      alignItems: 'center',
+      justifyContent: 'center',
+    }
 
 })
 

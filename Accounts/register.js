@@ -10,6 +10,7 @@ export default class App extends React.Component{
 
     handleUsename = (username)=> {this.setState({username})}
     handleEmail = (email)=> {this.setState({email})}
+    handlePhone = (phone)=> {this.setState({phone})}
     handlePassword = (password) => {this.setState({ password })}
     handleConfirmPassword = (confirmpassword) => {this.setState({ confirmpassword })}
 
@@ -35,18 +36,19 @@ export default class App extends React.Component{
             <View>
                 <ScrollView>
                 <Image source={require('../assets/zuku.jpeg')} style={{marginTop:0,width:"100%"}} />
-                <Text style={styles.heading}>Welcome to Zuku{"\n"} Please Create an account</Text>
+                <Text style={[styles.heading,{color:'white'}]}>Create an account</Text>
                 <TextInput placeholder="Username" onChangeText={this.handleUsename} style={styles.inputs} /><Text/>
-                <TextInput placeholder="Email" onChangeText={this.handleEmail} style={styles.inputs}/><Text/>
-                <TextInput placeholder="Password" onChangeText={this.handlePassword} style={styles.inputs} /><Text/>
-                <TextInput placeholder="Confirm Password" onChangeText={this.handleConfirmPassword} style={styles.inputs} /><Text/>
+                <TextInput placeholder="Email" keyboardType={'email-address'} onChangeText={this.handleEmail} style={styles.inputs}/><Text/>
+                <TextInput placeholder="Phone" onChangeText={this.handlePhone} style={styles.inputs}/><Text/>
+                <TextInput placeholder="Password" secureTextEntry={true} onChangeText={this.handlePassword} style={styles.inputs} /><Text/>
+                <TextInput placeholder="Confirm Password" secureTextEntry={true} onChangeText={this.handleConfirmPassword} style={styles.inputs} /><Text/>
                 <View style={styles.login}>
 
-                <View style={styles.submitButton} >
-                    <TouchableOpacity onPress={this.handleSubmit}>
+                
+                    <TouchableOpacity style={styles.submitButton} onPress={this.handleSubmit}>
                     <View><Text >Sign Up</Text></View>
                     </TouchableOpacity>
-                    </View>
+                    
                     
 
                     <View style={{width: "20%", height: 50,
@@ -56,11 +58,11 @@ export default class App extends React.Component{
                                     justifyContent: 'center',
                                     borderRadius:25,}} ><Text>Or</Text></View>
 
-                <View style={styles.submitButton} >
-                    <TouchableOpacity onPress={()=>this.props.navigation.navigate('Login')}>
+                
+                    <TouchableOpacity  style={styles.submitButton} onPress={()=>this.props.navigation.navigate('Login')}>
                         <View ><Text>login</Text></View>
                     </TouchableOpacity></View>
-                </View>
+                
 
                 </ScrollView>
             </View>
