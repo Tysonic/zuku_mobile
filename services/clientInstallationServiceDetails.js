@@ -18,6 +18,7 @@ export default class App extends React.Component{
             res.service.forEach(itm =>{if(itm.service_id===this.state.service)
                 {this.setState({...itm})}}),
                 this.setState({isLoading:false}),
+                console.log(res)
                 
             ])
             

@@ -187,7 +187,24 @@ export const styles = StyleSheet.create({
       alignContent:"center",
       alignItems: 'center',
       justifyContent: 'center',
-    }
+    },
+    serviceContainer: {
+      justifyContent: 'flex-end',
+      borderRadius: 5,
+      padding: 10,
+      height: 150,
+      backgroundColor: '#447866',
+      borderBottomLeftRadius:50,
+      borderTopRightRadius:50
+    },
+    serviceItemText: {
+      fontWeight: '800',
+      fontSize: 18,
+      color: '#d5d5d5',
+      marginBottom:"20%"
+    },
+
+
 
 })
 

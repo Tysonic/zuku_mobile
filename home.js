@@ -36,7 +36,7 @@ logOutHandler = ()=>{
 
 
       <SectionGrid
-        itemDimension={120}
+        itemDimension={160}
         sections={[
           {
             

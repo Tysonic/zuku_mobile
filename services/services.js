@@ -15,7 +15,7 @@ componentDidMount() {
       .then((response) => response.json())
       .then((json) => [this.setState({services:json.services,isLoading: false,})
           ,json.clients.forEach(item=>{if(item.username===global.user){[this.setState(({...item})),
-          global.services=this.state]}})])
+          global.services=this.state]}}),console.log(this.state.services)])
       .catch((error) => console.error(error))   
 }
 

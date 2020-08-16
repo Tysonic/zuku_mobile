@@ -22,7 +22,7 @@ handleSubmit = (e)=>{
   })
   .then(
    response => response.json()
-  ).then(()=>this.props.navigation.navigate('Clients'))
+  ).then(()=>this.props.navigation.navigate('ClientInstallationServiceDetails'))
 
 }
 
@@ -60,33 +60,20 @@ console.log(global.services.services)
 
 
   render() {
+    
     return (
      
         <View>
 
-
-<View style={styles.logout,{flex: 1,
-      flexDirection: "row",
-      backgroundColor:'#7ab',
-      marginLeft:'10%',marginRight:'10%',borderRadius:10}}>
-        <TouchableOpacity style={styles.submitButton} onPress={()=>this.props.navigation.navigate("Home")}>
-          <Text>Home</Text>
+        
+        <TouchableOpacity  style={styles.logout}
+          onPress={()=>this.props.navigation.navigate("Services")}>
+           <Text style={styles.serviceGroupText}>More Services</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.submitButton} onPress={this.logOutHandler}>
-          <Text>Logout</Text>
-        </TouchableOpacity>
-        </View>
-
-
-          
-        <View style={styles.logout}>
-        <TouchableOpacity style={styles.submitButton} onPress={()=>this.props.navigation.navigate("Home")}>
-           <Text>Back To Home</Text>
-        </TouchableOpacity>
-        </View>
+        
       <FlatGrid
         itemDimension={130}
-        data={this.serviceloop()}
+        data={this.serviceloop().sort((a,b)=>a.amount.toString().localeCompare(b.amount.toString()))}
 
         renderItem={({ item, index }) => (
           <TouchableOpacity onPress={()=>(
@@ -95,11 +82,12 @@ console.log(global.services.services)
             this.state.amount = item.amount,
             this.state.band=item.band,
             this.state.package = item.package,
+            this.state.client=global.services.id,
             this.showAlert1()
             )}>
 
-          <View style={[styles.itemContainer, { backgroundColor: '#050', borderBottomLeftRadius:50, borderTopRightRadius:50 }]}>
-            <Text style={styles.itemCode}>
+          <View style={styles.serviceContainer}>
+            <Text style={styles.serviceItemText}>
             <Text >{item.package + '\n'}</Text>
                 <Text >{item.band +'\n'}</Text>
                 <Text>{'At '+item.amount +'Ugx'}</Text>
