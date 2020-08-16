@@ -61,7 +61,7 @@ export default class App extends React.Component{
         return(
 <ScrollView >
 
-    <Image source={require('../assets/zuku.jpeg')} style={{marginTop:0,width:"100%"}} />
+    <Image source={require('../assets/z.jpeg')} style={{marginTop:0,width:"100%"}} />
     {this.state.isloading===true ?<ActivityIndicator size={200}/> :
     <View>
     {this.state.result===null ? 

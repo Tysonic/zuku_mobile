@@ -19,6 +19,7 @@ logOutHandler = ()=>{
       { name: 'My Connections', code:()=> this.props.navigation.navigate("Installation"), image:require('./assets/installation.png') },
       { name: 'Payments', code:()=> this.props.navigation.navigate("Charges"), image:require('./assets/charges.png')  },
       { name: 'About Us',code:()=> this.props.navigation.navigate("AboutUs"), image:require('./assets/About.jpeg')  },
+      { name: 'Help',code:()=> this.props.navigation.navigate("Help"), image:require('./assets/Help.jpeg')  },
 
     ];
 
@@ -44,10 +45,10 @@ logOutHandler = ()=>{
           
         ]}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={item.code} style={[styles.itemContainer, { backgroundColor: "#418171"}]}>
-            <Image source={item.image} style={{marginTop:0,width:'100%', height:'80%'}} />
+          <TouchableOpacity onPress={item.code} style={[styles.itemContainer, { backgroundColor: "#418171",borderRadius:100}]}>
+            <Image source={item.image} style={{marginTop:0,width:'80%', height:'80%',borderRadius:100,alignSelf:"center",alignItems:"center"}} />
             <View style={styles.services}>
-            <Text style={styles.itemName}>{item.name}</Text>
+            <Text style={[styles.itemName,{textAlign:"center"}]}>{item.name}</Text>
             </View>
           </TouchableOpacity>)}
       />

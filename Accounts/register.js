@@ -35,7 +35,7 @@ export default class App extends React.Component{
         return (
             <View>
                 <ScrollView>
-                <Image source={require('../assets/zuku.jpeg')} style={{marginTop:0,width:"100%"}} />
+                <Image source={require('../assets/z.jpeg')} style={{marginTop:0,width:"100%"}} />
                 <Text style={[styles.heading,{color:'white'}]}>Create an account</Text>
                 <TextInput placeholder="Username" onChangeText={this.handleUsename} style={styles.inputs} /><Text/>
                 <TextInput placeholder="Email" keyboardType={'email-address'} onChangeText={this.handleEmail} style={styles.inputs}/><Text/>

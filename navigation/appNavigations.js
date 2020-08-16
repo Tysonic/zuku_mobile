@@ -14,6 +14,7 @@ import TvPackages from '../services/tvPackages'
 import ZukuOffice from '../services/zukuOffice'
 import TriplePlay from '../services/triplePlay'
 import ResetPassword from '../Accounts/resetPassword'
+import Help from '../help'
 
 const AppNavigator = createSwitchNavigator(
     {
@@ -29,7 +30,8 @@ const AppNavigator = createSwitchNavigator(
         ZukuOffice:ZukuOffice,
         TriplePlay:TriplePlay,
         TvPackages:TvPackages,
-        ResetPassword:ResetPassword
+        ResetPassword:ResetPassword,
+        Help:Help
     }
 )
 

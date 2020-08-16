@@ -132,6 +132,15 @@ export const styles = StyleSheet.create({
       padding: 10,
       height: 150,
     },
+    
+    
+    homeItems: {
+      justifyContent: 'flex-end',
+      borderRadius: 10,
+      padding: 10,
+      height: 150,
+    }
+    ,
     itemName: {
       fontSize: 16,
       color: '#fff',

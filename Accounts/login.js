@@ -39,7 +39,7 @@ export default class App extends React.Component{
             
             <View >
                 <ScrollView>
-                <Image source={require('../assets/zuku.jpeg')} style={{marginTop:0,width:"100%"}} />
+                <Image source={require('../assets/z.jpeg')} style={{marginTop:0,width:"100%"}} />
                 {this.state.isloading===true ?<ActivityIndicator size="large"/> :
                 <Text style={[styles.heading,{color:'white'}]}>Login in to your accounts</Text>
                 }
