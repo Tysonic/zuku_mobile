@@ -59,7 +59,7 @@ export default class App extends React.Component{
     render(){
         
         return(
-<ScrollView >
+<ScrollView style={styles.container}>
 
     <Image source={require('../assets/z.jpeg')} style={{marginTop:0,width:"100%"}} />
     {this.state.isloading===true ?<ActivityIndicator size={200}/> :
@@ -78,6 +78,18 @@ export default class App extends React.Component{
             onPress={this.handleSubmitEmail}>
             <Text style={{color:'white'}}>Submit</Text>
         </TouchableOpacity>
+
+        <TouchableOpacity 
+        style={[styles.submitButton,
+            {marginLeft:'10%',
+            backgroundColor:'#54a9ac',
+            borderRadius:10,
+            marginBottom:"10%",
+            marginTop:'5%'
+            }]} 
+            onPress={()=>this.props.navigation.navigate('Login')}>
+            <Text style={{color:'white'}}>Login</Text>
+        </TouchableOpacity>
     </View>
     : 
     <View style={{marginTop:'10%'}}>
@@ -87,6 +99,7 @@ export default class App extends React.Component{
             onPress={this.handleResetPassword}>
             <Text style={{color:'white'}}>Submit</Text>
         </TouchableOpacity>
+        
     </View>
     }
 

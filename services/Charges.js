@@ -1,6 +1,7 @@
 import React from 'react'
 import {styles} from '../styles'
 import {View, TouchableOpacity, Text, List, ListItem} from 'react-native'
+import { ceil } from 'react-native-reanimated'
 
 export default class App extends React.Component{
 
@@ -29,7 +30,7 @@ export default class App extends React.Component{
 
     render() {
         return(
-            <View >
+            <View  style={styles.container}>
                 {this.state.isLoading===true ? <Text>Loading</Text> :(
                     <View>
 
@@ -40,24 +41,26 @@ export default class App extends React.Component{
         </View>
 
                 <View style={{ backgroundColor: '#9bc', marginTop:'10%', borderRadius:50,height:'80%',alignItems:"center",}}>                    
-                <Text style={{ fontSize:20}}>
+                <Text style={{ fontSize:20,textAlign:"center"}}>
                 {'\n'}{'\n'}
                     Hello dear, {global.user}{'\n'}
                     you are paying for{'\n'}
-                     zuku {this.state.package}{'\n'}
-                     of {this.state.amount} per month.{'\n'}
+                     {this.state.package}{'\n'}
+                     of shs: {this.state.amount}/=  per month.{'\n'}
                      Enjoy first speed internet{'\n'}{'\n'}
+                     Note! Installation shall take place in 48 hours from time of payment{'\n'}
+                     {'\n'}{'\n'}
                      Select payment option
                 </Text>
 
                 <TouchableOpacity onPress={this.handlePayment}>
-                  <Text style={{ fontSize:17}}>
-                    Mobile money
+                  <Text style={{ fontSize:17,padding:10,backgroundColor:'#689',borderRadius:30}}>
+                    {">>>"} Mobile money
                   </Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={this.handlePayment}>
-                  <Text style={{ fontSize:17}}>
-                    Bank deposit
+                  <Text style={{ fontSize:17,padding:10,backgroundColor:'#689',borderRadius:30}}>
+                  {">>>"} Bank deposit
                   </Text>
                 </TouchableOpacity >
                 </View>

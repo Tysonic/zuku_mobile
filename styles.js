@@ -5,7 +5,6 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     height: "100%",
-    paddingTop: Platform.OS==='android' ? StatusBar.currentHeight:0,
     backgroundColor:'#69a',
   
   },
@@ -169,11 +168,11 @@ export const styles = StyleSheet.create({
   serviceGroup:
   {
     backgroundColor:"#379",
-    height:'22.5%',
+    height:'25%',
     borderRadius:20,
     justifyContent:"center",
     borderColor:'#69a',
-    borderWidth:10,
+    borderWidth:5,
     alignItems:"center"},
 
     serviceGroupText:{fontSize:30},
@@ -204,6 +203,29 @@ export const styles = StyleSheet.create({
       marginBottom:"20%"
     },
 
+    paymentButton:
+    {
+     borderBottomStartRadius:50,
+     borderBottomEndRadius:50,
+     backgroundColor:'#456',
+     position:"absolute",
+     bottom:0,
+     height:"15%",
+     width:"100%",
+    },
+
+    helpHeader:{
+      borderTopLeftRadius:50,
+      borderTopRightRadius:50,
+      backgroundColor:'#456',
+      top:0,
+      width:"100%",
+      textAlign:"center",
+      fontSize:20,
+      color:"white"
+     },
+
+     
 
 
 })

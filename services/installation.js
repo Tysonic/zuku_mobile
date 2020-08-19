@@ -5,23 +5,29 @@ import {View, TouchableOpacity, Text, List, ListItem} from 'react-native'
 export default class App extends React.Component{
 
     state = {
-        isLoading:true
+        isLoading:true,
+        instals:[]
     }
     componentDidMount(){
         fetch("https://zuku-backend.herokuapp.com/installation details")
         .then(response=>response.json())
         .then(res=>
-            [res.client.forEach(element => {if(element.username===global.user)
-                {this.setState({...element})}}),
-            res.installation.forEach(item=>{if(item.client===this.state.client_id)
-                {this.setState({...item})}}),
-            res.service.forEach(itm =>{if(itm.service_id===this.state.service)
-                {this.setState({...itm})}}),
+            [
+                this.setState({...this.state,service:res.service}),
+                res.client.forEach(element => {if(element.username===global.user)
+                {this.setState({...this.state,...element})}}),
+                res.installation.forEach(item=>{if(item.client===this.state.client_id)
+                {this.state.instals.push({...item})}}),
                 this.setState({isLoading:false}),
-                
+                console.log(this.state)
+
             ])
-            
     }
+
+    handlePayment = ()=>{
+        this.props.navigation.navigate('Charges')
+    }
+
 
     render() {
         return(
@@ -34,17 +40,30 @@ export default class App extends React.Component{
            <Text>Back To Home</Text>
         </TouchableOpacity>
         </View>
-
-                <Text style={{ backgroundColor: '#9bc', marginTop:'10%', borderRadius:50,height:'80%',textAlign:"center", fontSize:20}}>
+            <View style={{backgroundColor: '#9bc', marginTop:'10%', borderRadius:50,height:'80%',}}>
+                <Text style={{ textAlign:"center", fontSize:20}}>
                     
                 {'\n'}{'\n'}
                     Hello dear, {global.user}{'\n'}
                     you have applied for{'\n'}
-                     zuku {this.state.package}{'\n'}
+                     {this.state.package}{'\n'}
                      of {this.state.band} {'\n'}
-                     At {this.state.amount} per month.{'\n'}{'\n'}
+                     At shs: {this.state.amount}/= per month.{'\n'}{'\n'}
                      Enjoy first speed internet
                 </Text>
+  
+                <TouchableOpacity style={styles.paymentButton} onPress={this.handlePayment}>
+                    <Text style={{textAlign:"center",  
+                    fontSize:20,color:'white',}}>
+                    <Text>
+                       Payment refference : {this.state.code}
+                    </Text>
+                    <Text style={{color:'#777',}}>
+                        {'\n'}Click and proceed to Payment
+                    </Text>
+                    </Text>
+                    </TouchableOpacity>
+                </View>
                 </View>
                 )}
                 

@@ -55,20 +55,8 @@ handleSubmit = (e)=>{
   render(){
     
   return (
-      <ScrollView>
-        <View style={styles.logout,{flex: 1,
-      flexDirection: "row",
-      backgroundColor:'#7ab',
-      marginLeft:'10%',marginRight:'10%',borderRadius:10}}>
-        <TouchableOpacity style={styles.submitButton} onPress={()=>this.props.navigation.navigate("Home")}>
-          <Text>Home</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.submitButton} onPress={this.logOutHandler}>
-          <Text>Logout</Text>
-        </TouchableOpacity>
-        </View>
-
-      <Text style={styles.heading}>Please confirm your details
+      <ScrollView  style={styles.container}>
+      <Text style={styles.heading}>Enter your details
       </Text>
       <TextInput editable={false} value={this.state.username} style={styles.inputs} onChangeText={this.handleUsername}/><Text></Text>
       <TextInput value={this.state.fname} placeholder='First Name' style={styles.inputs} onChangeText={this.handleFname}/><Text></Text>

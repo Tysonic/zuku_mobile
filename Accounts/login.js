@@ -9,6 +9,8 @@ export default class App extends React.Component{
         this.state = {
             user:NaN,
             isloading:false,
+            email:null,
+            password:null
         }
     }
 
@@ -17,7 +19,7 @@ export default class App extends React.Component{
     
     handleSubmit = (e) => {
         this.setState({isloading:true})
-        e.preventDefault()
+        
         fetch('https://zuku-backend.herokuapp.com/client login', 
         { method: 'POST',
         body:JSON.stringify(this.state),
@@ -26,18 +28,23 @@ export default class App extends React.Component{
          }
         ).then(
                response => response.json()
-          ).then((data)=>[this.setState({isloading:false}),data.result==="success" ? [global.user=data.user,this.props.navigation.navigate('Home')]
+          ).then((data)=>[this.setState({isloading:false}),data.result==="success" ? 
+          [global.user=data.user,this.props.navigation.navigate('Home')]
           :alert("Username or password is incorrect")]
           )
     };
  
     
-    
+    valueCheck =()=>{
+        this.state.email===null ? alert("email required") : 
+        this.state.password===null ? alert("Password required") :
+        this.handleSubmit()
+    }
 
     render() {
         return (
             
-            <View >
+            <View  style={styles.container}>
                 <ScrollView>
                 <Image source={require('../assets/z.jpeg')} style={{marginTop:0,width:"100%"}} />
                 {this.state.isloading===true ?<ActivityIndicator size="large"/> :
@@ -49,7 +56,7 @@ export default class App extends React.Component{
 
                 <View style={styles.login}>
                     
-                    <TouchableOpacity  style={styles.submitButton} onPress={this.handleSubmit}>
+                    <TouchableOpacity  style={styles.submitButton} onPress={this.valueCheck}>
                     <Text style={{color:'white'}}>login</Text>
                     </TouchableOpacity>
 

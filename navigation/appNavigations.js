@@ -1,6 +1,6 @@
 import React from 'react'
-import {Text, Button, View, TouchableOpacity} from 'react-native'
-import {createSwitchNavigator,createAppContainer} from 'react-navigation'
+import {createStackNavigator} from 'react-navigation-stack'
+import {createAppContainer,createSwitchNavigator} from 'react-navigation'
 import Login from '../Accounts/login'
 import Register from '../Accounts/register'
 import Clients from '../clients/clients'
@@ -15,13 +15,15 @@ import ZukuOffice from '../services/zukuOffice'
 import TriplePlay from '../services/triplePlay'
 import ResetPassword from '../Accounts/resetPassword'
 import Help from '../help'
-import ClientInstallationServiceDetails from '../services/clientInstallationServiceDetails'
+import Scratch from '../scratch/scratch'
+import { ActivityIndicator } from 'react-native'
 
-const AppNavigator = createSwitchNavigator(
+const AppNavigator = createStackNavigator(
     {
+        
         Login:Login,
-        Register: Register,
         Home: Home,
+        Scratch:Scratch,
         Charges:Charges,
         Services: Services,
         Installation : Installation,
@@ -31,12 +33,18 @@ const AppNavigator = createSwitchNavigator(
         ZukuOffice:ZukuOffice,
         TriplePlay:TriplePlay,
         TvPackages:TvPackages,
+        Register: Register,
         ResetPassword:ResetPassword,
         Help:Help,
-        ClientInstallationServiceDetails:ClientInstallationServiceDetails
     }
 )
 
-const App = createAppContainer(AppNavigator);
 
-export default App
+
+const main = createSwitchNavigator({
+    
+    AppNavigator:AppNavigator
+    
+})
+
+export default  createAppContainer(main);

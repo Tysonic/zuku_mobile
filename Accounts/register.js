@@ -7,6 +7,11 @@ import {ScrollView,Text, Image, Button,TextInput, View,
 
 
 export default class App extends React.Component{
+    state = {
+        email:null,
+        username:null,
+        password:null
+    }
 
     handleUsename = (username)=> {this.setState({username})}
     handleEmail = (email)=> {this.setState({email})}
@@ -16,6 +21,7 @@ export default class App extends React.Component{
 
 
     handleSubmit = (e) => {
+        
         fetch("https://zuku-backend.herokuapp.com/register client",
         {
         method:'POST',
@@ -25,15 +31,21 @@ export default class App extends React.Component{
         .then(response => response.json())
         .then((res) =>res.result==='success' ? 
         this.props.navigation.navigate('Login'):alert(JSON.stringify(res)))
-        
-        
+    }       
+
+
+    valueCheck=()=>{
+        this.state.username ===null ? alert("Username required"):
+        this.state.email===null ? alert('Email required') :
+        this.state.password===null ? alert("Password required") :
+        this.state.password===this.state.confirmpassword ?
+         this.handleSubmit(): alert("Password does not match")
     }
-            
     
 
     render() {
         return (
-            <View>
+            <View style={styles.container}>
                 <ScrollView>
                 <Image source={require('../assets/z.jpeg')} style={{marginTop:0,width:"100%"}} />
                 <Text style={[styles.heading,{color:'white'}]}>Create an account</Text>
@@ -45,7 +57,7 @@ export default class App extends React.Component{
                 <View style={styles.login}>
 
                 
-                    <TouchableOpacity style={styles.submitButton} onPress={this.handleSubmit}>
+                    <TouchableOpacity style={styles.submitButton} onPress={this.valueCheck}>
                     <View><Text >Sign Up</Text></View>
                     </TouchableOpacity>
                     

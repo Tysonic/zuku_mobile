@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Alert,FlatList, ScrollView, View, Text, ActivityIndicator, TouchableOpacity} from 'react-native';
+import {View,Alert, Text,TouchableOpacity} from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
 import {styles} from '../styles'
 
@@ -22,7 +22,7 @@ handleSubmit = (e)=>{
   })
   .then(
    response => response.json()
-  ).then(()=>this.props.navigation.navigate('ClientInstallationServiceDetails'))
+  ).then(()=>this.props.navigation.navigate('Installation'))
 
 }
 
@@ -38,8 +38,6 @@ return(service)
 }
 
 showAlert1=()=> {
-    
-console.log(global.services.services)
   Alert.alert(
       "Dear " + global.user + ',',
       'You are applying for :\n'+
@@ -63,7 +61,7 @@ console.log(global.services.services)
     
     return (
      
-        <View>
+        <View   style={styles.container}>
 
         
         <TouchableOpacity  style={styles.logout}
@@ -73,7 +71,8 @@ console.log(global.services.services)
         
       <FlatGrid
         itemDimension={130}
-        data={this.serviceloop().sort((a,b)=>a.amount.toString().localeCompare(b.amount.toString()))}
+        data={this.serviceloop().sort((a,b)=>
+          a.amount.toString().localeCompare(b.amount.toString()))}
 
         renderItem={({ item, index }) => (
           <TouchableOpacity onPress={()=>(

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, View, Text, TouchableOpacity, Image } from 'react-native';
+import { Alert, View, Text, TouchableOpacity, Image } from 'react-native';
 import { SectionGrid } from 'react-native-super-grid';
 import {styles} from './styles';
  
@@ -10,6 +10,22 @@ logOutHandler = ()=>{
   fetch('https://zuku-backend.herokuapp.com/.logout user')
   this.props.navigation.navigate('Login')
   global.user=undefined
+}
+
+
+showAlert=()=> {
+  Alert.alert(
+      "Dear " + global.user + ',',
+      'Are you sure you want to log out',
+      [
+          {
+              text: 'Cancel',
+              onPress: () => {},
+              style: 'cancel',
+          },
+          {text: 'Log out', onPress: () => this.logOutHandler()},
+      ]
+  );
 }
   
   render() {
@@ -26,11 +42,17 @@ logOutHandler = ()=>{
     
  
     return (
-      <View>
+      <View  style={styles.container}>
         
         <View>
-        <TouchableOpacity style={styles.logout} onPress={this.logOutHandler}>
+        <TouchableOpacity style={styles.logout} onPress={this.showAlert}>
           <Text>Logout</Text>
+        </TouchableOpacity>
+        </View>
+
+        <View>
+        <TouchableOpacity style={styles.logout} onPress={()=>this.props.navigation.navigate('Scratch')}>
+          <Text>Scratch</Text>
         </TouchableOpacity>
         </View>
 
@@ -45,8 +67,16 @@ logOutHandler = ()=>{
           
         ]}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={item.code} style={[styles.itemContainer, { backgroundColor: "#418171",borderRadius:100}]}>
-            <Image source={item.image} style={{marginTop:0,width:'80%', height:'80%',borderRadius:100,alignSelf:"center",alignItems:"center"}} />
+          <TouchableOpacity onPress={item.code} style=
+          {[styles.itemContainer, { backgroundColor: "#418171",borderRadius:100}]}>
+            <Image source={item.image} style=
+            {{
+              marginTop:0,width:'80%',
+              height:'80%',
+              borderRadius:100,
+              alignSelf:"center",
+              alignItems:"center"
+              }} />
             <View style={styles.services}>
             <Text style={[styles.itemName,{textAlign:"center"}]}>{item.name}</Text>
             </View>

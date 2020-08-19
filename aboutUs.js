@@ -6,7 +6,7 @@ export default class App extends React.Component{
 
     render() {
         return(
-            <ScrollView>
+            <ScrollView  style={styles.container}>
                         
                 <View style={styles.logout}>
                     <TouchableOpacity style={styles.submitButton} onPress={()=>this.props.navigation.navigate("Home")}>

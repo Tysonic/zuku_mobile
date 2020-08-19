@@ -22,7 +22,7 @@ handleSubmit = (e)=>{
   })
   .then(
    response => response.json()
-  ).then(()=>this.props.navigation.navigate('ClientInstallationServiceDetails'))
+  ).then(()=>this.props.navigation.navigate('Installation'))
 
 }
 
@@ -63,7 +63,7 @@ console.log(global.services.services)
     
     return (
      
-        <View>
+        <View  style={styles.container}>
 
         
         <TouchableOpacity style={[styles.logout]} 

@@ -9,7 +9,7 @@ export default class App extends React.Component{
         return(
 
 
-<View>
+<View  style={styles.container}>
 
 <View style={styles.logout}>
         <TouchableOpacity style={styles.submitButton} onPress={()=>this.props.navigation.navigate("Home")}>
@@ -18,13 +18,13 @@ export default class App extends React.Component{
         </View>
         <View style={{ backgroundColor: '#9bc', marginTop:'10%', borderRadius:50,height:'80%', alignItems:"center"}}>
                 
-                <Text style={{textAlign:"center",fontSize:25}}>
+                <Text style={styles.helpHeader}>
                 {'\n'}{'\n'}
                 For Enquiries! {'\n'}
                 Please contact us on:{'\n'}
                 </Text>
 
-                <Text style={{fontSize:20}}>
+                <Text style={{fontSize:20,marginTop:'10%'}}>
                 Tel            : 0776764871,0708621761{'\n'}
                 Whatsapp: 0700671644{'\n'}
                 Email        : zukufiber.co.ug{'\n'}
