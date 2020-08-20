@@ -11,7 +11,6 @@ export default class Example extends Component {
      }
      
 handleSubmit = (e)=>{
-  console.log(this.state)
   fetch('https://zuku-backend.herokuapp.com/installations',
   {
     method: 'POST',
@@ -22,7 +21,7 @@ handleSubmit = (e)=>{
   })
   .then(
    response => response.json()
-  ).then(()=>this.props.navigation.navigate('Installation'))
+  ).then(data=>[global.install=data.instal,this.props.navigation.navigate('InstallationsDetails')])
 
 }
 

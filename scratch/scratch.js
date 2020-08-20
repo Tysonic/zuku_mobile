@@ -1,6 +1,6 @@
 import React from 'react'
 import {styles} from '../styles'
-import {View, TouchableOpacity, Text, List, ListItem} from 'react-native'
+import {View, TouchableOpacity, Text, List, ListItem, Alert} from 'react-native'
 import { FlatGrid } from 'react-native-super-grid';
 
 export default class App extends React.Component{
@@ -20,7 +20,7 @@ export default class App extends React.Component{
                 res.installation.forEach(item=>{if(item.client===this.state.client_id)
                 {this.state.instals.push({...item})}}),
                 this.setState({isLoading:false}),
-                console.log(this.state)
+                alert(JSON.stringify(this.state.instals))
 
             ])
     }
@@ -51,7 +51,9 @@ export default class App extends React.Component{
               
             <TouchableOpacity>
               <View style={styles.serviceContainer}>
-                <Text >{item.install_id + '\n' +this.state.band  + '\n' + this.state.amount  + '\n' + this.state.package}</Text>
+                <Text >{item.install_id + '\n' +this.state.band  + '\n' + 
+                this.state.amount  + '\n' + this.state.package +"\n"
+                + item.address+"\n" +item.estate}</Text>
               </View>
               </TouchableOpacity>
 

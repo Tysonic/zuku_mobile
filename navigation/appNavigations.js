@@ -17,6 +17,7 @@ import ResetPassword from '../Accounts/resetPassword'
 import Help from '../help'
 import Scratch from '../scratch/scratch'
 import { ActivityIndicator } from 'react-native'
+import InstallationsDetails from '../services/installationDetails'
 
 const AppNavigator = createStackNavigator(
     {
@@ -35,6 +36,7 @@ const AppNavigator = createStackNavigator(
         TvPackages:TvPackages,
         Register: Register,
         ResetPassword:ResetPassword,
+        InstallationsDetails:InstallationsDetails,
         Help:Help,
     }
 )
