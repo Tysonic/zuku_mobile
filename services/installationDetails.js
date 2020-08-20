@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View, TextInput, ScrollView,TouchableOpacity} from 'react-native';
+import {Text, View, TextInput, ScrollView,TouchableOpacity,ActivityIndicator} from 'react-native';
 import {styles} from '../styles'
 import { timing } from 'react-native-reanimated';
 
@@ -9,6 +9,7 @@ export default class App extends React.Component {
       estate:"",
       city:"",
       floor:"",
+      isloading:false,
       address:""
   }
 
@@ -25,6 +26,7 @@ export default class App extends React.Component {
 
 handleSubmit = ()=>{
     this.state.install_id=global.install.install_id
+    this.setState({isloading:true})
 
   fetch('https://zuku-backend.herokuapp.com/update installations',
   {
@@ -36,7 +38,8 @@ handleSubmit = ()=>{
   })
   .then(
    response => response.json()
-  ).then(data=>[global.install=data,alert(JSON.stringify(global.install)),this.props.navigation.navigate("Charges")]) 
+  ).then(data=>[global.install=data,alert(JSON.stringify(global.install)),
+    this.props.navigation.navigate("Charges"),this.setState({isloading:false})]) 
 }
 
     handleApartNo = (apart_no)=>{this.setState({apart_no})}
@@ -52,6 +55,8 @@ handleSubmit = ()=>{
     
   return (
       <ScrollView  style={styles.container}>
+        {this.state.isloading===false ?
+        <View>
       <Text style={styles.heading}>Enter Location details</Text>
         <TextInput value = {this.state.apart_no} placeholder="Apartment Number"  style={styles.inputs} onChangeText = {this.handleApartNo}/><Text></Text>
         <TextInput value = {this.state.city} placeholder='City' style={styles.inputs} onChangeText={this.handleCity}/><Text></Text>
@@ -64,6 +69,9 @@ handleSubmit = ()=>{
             <View ><Text style={{textAlign:'center'}}>Submit</Text></View>
             </TouchableOpacity>
         </View>
+        </View>
+        :
+        <ActivityIndicator size="large"/>}
       </ScrollView>
       );}
 }

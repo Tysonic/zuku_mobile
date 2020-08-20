@@ -33,7 +33,7 @@ showAlert=()=> {
       { name: 'Services', code: ()=>this.props.navigation.navigate("Services"), image:require('./assets/service2.jpeg')  },
       { name: 'Profile', code: ()=>this.props.navigation.navigate("Clients"), image:require('./assets/profile.png') },
       { name: 'My Connections', code:()=> this.props.navigation.navigate("Installation"), image:require('./assets/installation.png') },
-      { name: 'Payments', code:()=> this.props.navigation.navigate("Charges"), image:require('./assets/charges.png')  },
+      { name: 'Payments', code:()=> [alert("Please select a service to pay for!"),this.props.navigation.navigate("Installation")], image:require('./assets/charges.png')  },
       { name: 'About Us',code:()=> this.props.navigation.navigate("AboutUs"), image:require('./assets/About.jpeg')  },
       { name: 'Help',code:()=> this.props.navigation.navigate("Help"), image:require('./assets/Help.jpeg')  },
 
@@ -47,12 +47,6 @@ showAlert=()=> {
         <View>
         <TouchableOpacity style={styles.logout} onPress={this.showAlert}>
           <Text>Logout</Text>
-        </TouchableOpacity>
-        </View>
-
-        <View>
-        <TouchableOpacity style={styles.logout} onPress={()=>this.props.navigation.navigate('Scratch')}>
-          <Text>Scratch</Text>
         </TouchableOpacity>
         </View>
 

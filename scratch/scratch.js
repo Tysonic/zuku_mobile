@@ -1,7 +1,6 @@
 import React from 'react'
 import {styles} from '../styles'
-import {View, TouchableOpacity, Text, List, ListItem, Alert} from 'react-native'
-import { FlatGrid } from 'react-native-super-grid';
+import {View, TouchableOpacity, Text, List, ListItem} from 'react-native'
 
 export default class App extends React.Component{
 
@@ -20,7 +19,7 @@ export default class App extends React.Component{
                 res.installation.forEach(item=>{if(item.client===this.state.client_id)
                 {this.state.instals.push({...item})}}),
                 this.setState({isLoading:false}),
-                alert(JSON.stringify(this.state.instals))
+                console.log(this.state)
 
             ])
     }
@@ -31,35 +30,36 @@ export default class App extends React.Component{
 
 
     render() {
+        return(
+            <View style={styles.container}>
+                {this.state.isLoading===true ? <Text>Loading</Text> :(
+                    <View>
 
-    
-        return (
-         
-            <View  style={styles.container}>
-            
-          <FlatGrid
-            itemDimension={170}
-            data={this.state.instals}
-    
-            renderItem={({ item, index }) => (
-                this.state.service.forEach(m=>{if(item.service===m.service_id){
-                    this.state.band=m.band
-                    this.state.package=m.package
-                    this.state.amount=m.amount
-                }
-            }),
-              
-            <TouchableOpacity>
-              <View style={styles.serviceContainer}>
-                <Text >{item.install_id + '\n' +this.state.band  + '\n' + 
-                this.state.amount  + '\n' + this.state.package +"\n"
-                + item.address+"\n" +item.estate}</Text>
-              </View>
-              </TouchableOpacity>
+<View style={styles.logout}>
+        <TouchableOpacity style={styles.submitButton} onPress={
+            ()=>this.props.navigation.navigate("Home")}>
+           <Text>Back To Home</Text>
+        </TouchableOpacity>
+        </View>
+            <View style={{backgroundColor: '#9bc', marginTop:'10%', 
+            borderRadius:50,height:'80%',}}>
+                <Text style={{ textAlign:"center", fontSize:20}}>
+                    
+                {'\n'}{'\n'}
+                    Hello dear, {global.user}{'\n'}
+                    you have applied for{'\n'}
+                     {this.state.package}{'\n'}
+                     of {this.state.band} {'\n'}
+                     At shs: {this.state.amount}/= per month.{'\n'}{'\n'}
+                     Enjoy first speed internet
+                </Text>
+  
 
-            )}
-          />
-          </View>
-          )}
-    
+                </View>
+                </View>
+                )}
+                
+            </View>
+        )
+    }
 }

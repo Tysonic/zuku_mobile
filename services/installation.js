@@ -1,6 +1,7 @@
 import React from 'react'
 import {styles} from '../styles'
-import {View, TouchableOpacity, Text, List, ListItem} from 'react-native'
+import {View, TouchableOpacity, Text, List, ListItem, Alert} from 'react-native'
+import { FlatGrid } from 'react-native-super-grid';
 
 export default class App extends React.Component{
 
@@ -18,56 +19,52 @@ export default class App extends React.Component{
                 {this.setState({...this.state,...element})}}),
                 res.installation.forEach(item=>{if(item.client===this.state.client_id)
                 {this.state.instals.push({...item})}}),
-                this.setState({isLoading:false}),
-                console.log(this.state)
-
+                this.setState({isLoading:false})
             ])
     }
 
     handlePayment = ()=>{
         this.props.navigation.navigate('Charges')
     }
-
-
     render() {
-        return(
-            <View >
-                {this.state.isLoading===true ? <Text>Loading</Text> :(
-                    <View>
+        return (
+         
+            <View  style={styles.container}>
+            
+          <FlatGrid
+            itemDimension={170}
+            data={this.state.instals}
+    
+            renderItem={({ item, index }) => (
+                this.state.service.forEach(m=>{if(item.service===m.service_id){
+                    this.state.band=m.band
+                    this.state.package=m.package
+                    this.state.amount=m.amount
+                    global.instals={'band':m.band,'package':m.package,
+                    'amount':m.amount,'address':item.address, 'code':m.code,
+                'floor':item.floor,'apart_no':item.apart_no}
+                }
+            }),
+              
+            
+              <View style={styles.serviceContainer}>
+                <Text style={{ textAlign:"left", fontSize:20,margin:10,color:'#222'}}>
 
-<View style={styles.logout}>
-        <TouchableOpacity style={styles.submitButton} onPress={()=>this.props.navigation.navigate("Home")}>
-           <Text>Back To Home</Text>
-        </TouchableOpacity>
-        </View>
-            <View style={{backgroundColor: '#9bc', marginTop:'10%', borderRadius:50,height:'80%',}}>
-                <Text style={{ textAlign:"center", fontSize:20}}>
-                    
-                {'\n'}{'\n'}
-                    Hello dear, {global.user}{'\n'}
-                    you have applied for{'\n'}
-                     {this.state.package}{'\n'}
-                     of {this.state.band} {'\n'}
-                     At shs: {this.state.amount}/= per month.{'\n'}{'\n'}
-                     Enjoy first speed internet
-                </Text>
-  
-                <TouchableOpacity style={styles.paymentButton} onPress={this.handlePayment}>
-                    <Text style={{textAlign:"center",  
-                    fontSize:20,color:'white',}}>
-                    <Text>
-                       Payment refference : {this.state.code}
+                    {this.state.package+"\n"+'in '+item.address+"\n" +'At '+item.estate+'\n'
+                    +'on the'+item.floor+"th Floor"}
                     </Text>
-                    <Text style={{color:'#777',}}>
-                        {'\n'}Click and proceed to Payment
-                    </Text>
-                    </Text>
+                    <TouchableOpacity onPress={this.handlePayment}
+                    style={{width:"80%",alignSelf:"center",
+                    alignItems:"center",backgroundColor:'#365',marginBottom:0}}>
+                        <Text style={{fontSize:20}}>
+                            Proceed to payments
+                        </Text>
                     </TouchableOpacity>
-                </View>
-                </View>
-                )}
-                
-            </View>
-        )
-    }
+              </View>
+             
+            )}
+          />
+          </View>
+          )}
+    
 }

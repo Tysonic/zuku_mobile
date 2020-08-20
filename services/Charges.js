@@ -5,24 +5,7 @@ import { ceil } from 'react-native-reanimated'
 
 export default class App extends React.Component{
 
-    state = {
-        isLoading:true
-    }
-    componentDidMount(){
-        fetch("https://zuku-backend.herokuapp.com/installation details")
-        .then(response=>response.json())
-        .then(res=>
-            [res.client.forEach(element => {if(element.username===global.user)
-                {this.setState({...element})}}),
-            res.installation.forEach(item=>{if(item.client===this.state.client_id)
-                {this.setState({...item})}}),
-            res.service.forEach(itm =>{if(itm.service_id===this.state.service)
-                {this.setState({...itm})}}),
-                this.setState({isLoading:false}),
-                
-            ])
-            
-    }
+
 
     handlePayment =()=>{
       alert('Under development')
@@ -31,8 +14,7 @@ export default class App extends React.Component{
     render() {
         return(
             <View  style={styles.container}>
-                {this.state.isLoading===true ? <Text>Loading</Text> :(
-                    <View>
+                
 
 <View style={styles.logout}>
         <TouchableOpacity style={styles.submitButton} onPress={()=>this.props.navigation.navigate("Home")}>
@@ -44,28 +26,32 @@ export default class App extends React.Component{
                 <Text style={{ fontSize:20,textAlign:"center"}}>
                 {'\n'}{'\n'}
                     Hello dear, {global.user}{'\n'}
-                    you are paying for{'\n'}
-                     {this.state.package}{'\n'}
-                     of shs: {this.state.amount}/=  per month.{'\n'}
-                     Enjoy first speed internet{'\n'}{'\n'}
+                    you have applied for{'\n'}
+                    {global.instals.package} of {global.instals.band}{'\n'}
+                     At shs: {global.instals.amount}/=  per month.{'\n\n'}
+                     
                      Note! Installation shall take place in 48 hours from time of payment{'\n'}
-                     {'\n'}{'\n'}
-                     Select payment option
+                     {'\n'}
+                     Enjoy first speed internet{'\n'}{'\n'}
+                     
                 </Text>
 
-                <TouchableOpacity onPress={this.handlePayment}>
-                  <Text style={{ fontSize:17,padding:10,backgroundColor:'#689',borderRadius:30}}>
-                    {">>>"} Mobile money
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={this.handlePayment}>
-                  <Text style={{ fontSize:17,padding:10,backgroundColor:'#689',borderRadius:30}}>
-                  {">>>"} Bank deposit
-                  </Text>
-                </TouchableOpacity >
+
+                <TouchableOpacity style={styles.paymentButton} onPress={this.handlePayment}>
+                    <Text style={{textAlign:"center",  
+                    fontSize:20,color:'white',}}>
+                    <Text>
+                       Payment refference : {global.instals.code}
+                    </Text>
+                    <Text style={{color:'#777',}}>
+                        {'\n'}Click and proceed to Payment
+                    </Text>
+                    </Text>
+                    </TouchableOpacity>
+
+                
                 </View>
-                </View>
-                )}
+                
                 
             </View>
         )
