@@ -27,8 +27,8 @@ export default class App extends React.Component{
                 {'\n'}{'\n'}
                     Hello dear, {global.user}{'\n'}
                     you have applied for{'\n'}
-                    {global.instals.package} of {global.instals.band}{'\n'}
-                     At shs: {global.instals.amount}/=  per month.{'\n\n'}
+                    {global.install.package} of {global.install.band}{'\n'}
+                     At shs: {global.install.amount}/=  per month.{'\n\n'}
                      
                      Note! Installation shall take place in 48 hours from time of payment{'\n'}
                      {'\n'}
@@ -37,11 +37,11 @@ export default class App extends React.Component{
                 </Text>
 
 
-                <TouchableOpacity style={styles.paymentButton} onPress={this.handlePayment}>
+                <TouchableOpacity style={styles.paymentButton} onPress={()=>this.handlePayment()}>
                     <Text style={{textAlign:"center",  
                     fontSize:20,color:'white',}}>
                     <Text>
-                       Payment refference : {global.instals.code}
+                       Payment refference : {global.install.code}
                     </Text>
                     <Text style={{color:'#777',}}>
                         {'\n'}Click and proceed to Payment

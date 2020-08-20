@@ -11,6 +11,7 @@ export default class App extends React.Component{
             result:null,
             email:null,
             message:false,
+            password:null
     }
 
     }
@@ -19,8 +20,8 @@ export default class App extends React.Component{
     handleEmail = (email)=> {this.setState({email})}
     handlePassword = (password) => {this.setState({ password })}
     handleConfirmPassword = (confirmpassword) => {this.setState({ confirmpassword })}
-    handleSubmitEmail=(e)=>{
-        e.preventDefault()
+
+    handleSubmitEmail=()=>{
         this.setState({isloading:true})
         fetch('https://zuku-backend.herokuapp.com/account check',
         {
@@ -40,9 +41,8 @@ export default class App extends React.Component{
         }
 
 
-        handleResetPassword=(e)=>{
+        handleResetPassword=()=>{
             this.setState({isloading:true}) 
-            e.preventDefault()
             fetch('https://zuku-backend.herokuapp.com/reset password',
         {
             method:'post',
@@ -53,8 +53,23 @@ export default class App extends React.Component{
         ).then(
             data =>{
                 [this.setState({isloading:false}), this.props.navigation.navigate("Login"),console.log(data)  ]         
-            })
+            }).catch(()=>[this.setState({isloading:false}),alert("Please check internet connection and try again")])
         }
+
+        emailCheck =()=>{
+            this.state.email===null ? alert("email required") : 
+            this.handleSubmitEmail()
+        }
+        
+
+        passwordCheck =()=>{
+            this.state.password===null ? alert("Password required") :
+            this.state.password!==this.state.confirmpassword ?
+            alert('Password does not match') :
+            this.handleResetPassword()
+        }
+    
+    
        
     render(){
         
@@ -69,34 +84,23 @@ export default class App extends React.Component{
         {this.state.message===false?
         <Text style={[styles.heading,{color:'white'}]}>Enter email address</Text>
         :
-        <Text style={[styles.heading,{color:'white'}]}>Email {this.state.invalidEmail}, {'\n'}is not registered</Text>
+        <Text style={[styles.heading,{color:'white'}]}>Email not registered</Text>
         }
         
-        <TextInput placeholder="Email"  keyboardType={'email-address'} onChangeText={this.handleEmail} style={styles.inputs} /><Text/>
+        <TextInput placeholder="Email" value={this.state.email}  keyboardType={'email-address'} onChangeText={this.handleEmail} style={styles.inputs} /><Text/>
     
         <TouchableOpacity  style={styles.passwordReset}
-            onPress={this.handleSubmitEmail}>
+            onPress={this.emailCheck}>
             <Text style={{color:'white'}}>Submit</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity 
-        style={[styles.submitButton,
-            {marginLeft:'10%',
-            backgroundColor:'#54a9ac',
-            borderRadius:10,
-            marginBottom:"10%",
-            marginTop:'5%'
-            }]} 
-            onPress={()=>this.props.navigation.navigate('Login')}>
-            <Text style={{color:'white'}}>Login</Text>
-        </TouchableOpacity>
     </View>
     : 
     <View style={{marginTop:'10%'}}>
-    <TextInput placeholder="Password" secureTextEntry={true} onChangeText={this.handlePassword} style={styles.inputs} /><Text/>
+    <TextInput value={this.state.password} placeholder="Password" secureTextEntry={true} onChangeText={this.handlePassword} style={styles.inputs} /><Text/>
     <TextInput placeholder="Confirm Password" secureTextEntry={true} onChangeText={this.handleConfirmPassword} style={styles.inputs} /><Text/>
     <TouchableOpacity  style={styles.passwordReset}
-            onPress={this.handleResetPassword}>
+            onPress={()=>this.passwordCheck()}>
             <Text style={{color:'white'}}>Submit</Text>
         </TouchableOpacity>
         

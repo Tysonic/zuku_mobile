@@ -70,12 +70,15 @@ export const styles = StyleSheet.create({
       fontSize:30,
       
     },
-    submitclient:{
-      height:80,
-      width: "100%",
-      backgroundColor:"#487",
-      justifyContent: 'space-between',
+
+    submitClient:{
+      height:40,
+      width: "80%",
       borderRadius:20,
+      backgroundColor:"#397", 
+      alignSelf: 'center',
+      borderRadius:15,
+      marginBottom:20
     },
     homeItem:{
       backgroundColor:"#677",
@@ -224,6 +227,16 @@ export const styles = StyleSheet.create({
       fontSize:20,
       color:"white"
      },
+
+     suButton:{
+      height:40,
+      width: "80%",
+      borderRadius:20,
+      backgroundColor:"#397", 
+      alignSelf: 'center',
+      borderRadius:15,
+      marginBottom:20
+    },
 
      
 

@@ -11,11 +11,6 @@ export default class App extends React.Component{
 
 <View  style={styles.container}>
 
-<View style={styles.logout}>
-        <TouchableOpacity style={styles.submitButton} onPress={()=>this.props.navigation.navigate("Home")}>
-           <Text>Back To Home</Text>
-        </TouchableOpacity>
-        </View>
         <View style={{ backgroundColor: '#9bc', marginTop:'10%', borderRadius:50,height:'80%', alignItems:"center"}}>
                 
                 <Text style={styles.helpHeader}>

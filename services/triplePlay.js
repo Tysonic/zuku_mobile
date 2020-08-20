@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View,Alert, Text,TouchableOpacity} from 'react-native';
+import {View,Alert, Text,TouchableOpacity, ActivityIndicator} from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
 import {styles} from '../styles'
 
@@ -7,10 +7,12 @@ export default class Example extends Component {
 
     constructor(props) {
         super (props);
-        this.state = {service:[]}
+        this.state = {service:[],isloading:false}
      }
      
 handleSubmit = (e)=>{
+  this.setState({isloading:true})
+  global.install=this.state
   fetch('https://zuku-backend.herokuapp.com/installations',
   {
     method: 'POST',
@@ -21,8 +23,9 @@ handleSubmit = (e)=>{
   })
   .then(
    response => response.json()
-  ).then(data=>[global.install=data.instal,this.props.navigation.navigate('InstallationsDetails')])
-
+  ).then(data=>[global.install={...global.install,...data.instal}, this.setState({isloading:false}),
+    this.props.navigation.navigate('InstallationsDetails')])
+    .catch(()=>[this.setState({isloading:false}),alert("Please check internet connection and try again")])
 }
 
 services = global.services.services
@@ -62,7 +65,8 @@ showAlert1=()=> {
      
         <View   style={styles.container}>
 
-        
+          {this.state.isloading===true ? <ActivityIndicator size="100%"/>:
+          <View>
         <TouchableOpacity  style={styles.logout}
           onPress={()=>this.props.navigation.navigate("Services")}>
            <Text style={styles.serviceGroupText}>More Services</Text>
@@ -81,6 +85,7 @@ showAlert1=()=> {
             this.state.band=item.band,
             this.state.package = item.package,
             this.state.client=global.services.id,
+            
             this.showAlert1()
             )}>
 
@@ -94,6 +99,9 @@ showAlert1=()=> {
           </TouchableOpacity>
         )}
       />
+      
+      </View>
+  }
       </View>
       )}
 

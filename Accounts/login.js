@@ -29,9 +29,13 @@ export default class App extends React.Component{
         ).then(
                response => response.json()
           ).then((data)=>[this.setState({isloading:false}),data.result==="success" ? 
-          [global.user=data.user,this.props.navigation.navigate('Home')]
-          :alert("Username or password is incorrect")]
-          )
+          [
+            global.user=data.user,
+            this.setState({email:null,password:null}),
+            this.props.navigation.navigate('Home')
+            ]
+          :[this.setState({password:null}),alert("Username or password is incorrect")]]
+          ).catch(()=>[this.setState({isloading:false}),alert("Please check internet connection and try again")])
     };
  
     
@@ -45,13 +49,14 @@ export default class App extends React.Component{
         return (
             
             <View  style={styles.container}>
+                {this.state.isloading===true ?<ActivityIndicator size="100%"/>:
                 <ScrollView>
                 <Image source={require('../assets/z.jpeg')} style={{marginTop:0,width:"100%"}} />
-                {this.state.isloading===true ?<ActivityIndicator size="large"/> :
-                <Text style={[styles.heading,{color:'white'}]}>Login in to your accounts</Text>
-                }
                 
-                <TextInput placeholder="Email"  keyboardType={'email-address'} onChangeText={this.handleEmail} style={styles.inputs} /><Text/>
+                <Text style={[styles.heading,{color:'white'}]}>Login in to your accounts</Text>
+                
+                
+                <TextInput value={this.state.email} placeholder="Email"  keyboardType={'email-address'} onChangeText={this.handleEmail} style={styles.inputs} /><Text/>
                 <TextInput placeholder="Password" secureTextEntry={true} onChangeText={this.handlePassword} style={styles.inputs} /><Text/>
 
                 <View style={styles.login}>
@@ -81,7 +86,9 @@ export default class App extends React.Component{
                     }]}  onPress={()=>this.props.navigation.navigate('ResetPassword')}>
                     <Text  >Forgot password</Text>
                 </TouchableOpacity>
+                
                 </ScrollView>
+    }
             </View>
         )
     }

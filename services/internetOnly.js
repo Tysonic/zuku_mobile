@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Alert,FlatList, ScrollView, View, Text, ActivityIndicator, TouchableOpacity} from 'react-native';
+import {View,Alert, Text,TouchableOpacity, ActivityIndicator} from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
 import {styles} from '../styles'
 
@@ -7,11 +7,11 @@ export default class Example extends Component {
 
     constructor(props) {
         super (props);
-        this.state = {service:[]}
+        this.state = {service:[],isloading:false}
      }
      
 handleSubmit = (e)=>{
-  console.log(this.state)
+  this.setState({isloading:true})
   fetch('https://zuku-backend.herokuapp.com/installations',
   {
     method: 'POST',
@@ -22,7 +22,8 @@ handleSubmit = (e)=>{
   })
   .then(
    response => response.json()
-  ).then(()=>this.props.navigation.navigate('Installation'))
+  ).then(data=>[this.setState({isloading:false}),global.install=data.instal,this.props.navigation.navigate('InstallationsDetails')])
+  .catch(()=>[this.setState({isloading:false}),alert("Please check internet connection and try again")])
 
 }
 
@@ -38,8 +39,6 @@ return(service)
 }
 
 showAlert1=()=> {
-    
-console.log(global.services.services)
   Alert.alert(
       "Dear " + global.user + ',',
       'You are applying for :\n'+
@@ -63,17 +62,19 @@ console.log(global.services.services)
     
     return (
      
-        <View  style={styles.container}>
+        <View   style={styles.container}>
 
-        
-        <TouchableOpacity  style={styles.logout} 
+          {this.state.isloading===true ? <ActivityIndicator size="100%"/>:
+          <View>
+        <TouchableOpacity  style={styles.logout}
           onPress={()=>this.props.navigation.navigate("Services")}>
            <Text style={styles.serviceGroupText}>More Services</Text>
         </TouchableOpacity>
-       
+        
       <FlatGrid
         itemDimension={130}
-        data={this.serviceloop().sort((a,b)=>a.amount.toString().localeCompare(b.amount.toString()))}
+        data={this.serviceloop().sort((a,b)=>
+          a.amount.toString().localeCompare(b.amount.toString()))}
 
         renderItem={({ item, index }) => (
           <TouchableOpacity onPress={()=>(
@@ -96,6 +97,9 @@ console.log(global.services.services)
           </TouchableOpacity>
         )}
       />
+      
+      </View>
+  }
       </View>
       )}
 

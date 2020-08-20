@@ -3,7 +3,7 @@ import {createStackNavigator} from 'react-navigation-stack'
 import {createAppContainer,createSwitchNavigator} from 'react-navigation'
 import Login from '../Accounts/login'
 import Register from '../Accounts/register'
-import Clients from '../clients/clients'
+import Profile from '../clients/clients'
 import Services from '../services/services'
 import Home from '../home.js'
 import Installation from '../services/installation'
@@ -19,6 +19,9 @@ import Scratch from '../scratch/scratch'
 import { ActivityIndicator } from 'react-native'
 import InstallationsDetails from '../services/installationDetails'
 
+
+
+
 const AppNavigator = createStackNavigator(
     {
         
@@ -28,7 +31,7 @@ const AppNavigator = createStackNavigator(
         Charges:Charges,
         Services: Services,
         Installation : Installation,
-        Clients:Clients,
+        Profile:Profile,
         AboutUs:AboutUs,
         InternetOnly:InternetOnly,
         ZukuOffice:ZukuOffice,

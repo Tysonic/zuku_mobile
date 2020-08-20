@@ -10,7 +10,8 @@ export default class App extends React.Component {
       city:"",
       floor:"",
       isloading:false,
-      address:""
+      address:"",
+      install_id:""
   }
 
   componentDidMount(){
@@ -25,21 +26,22 @@ export default class App extends React.Component {
   }
 
 handleSubmit = ()=>{
-    this.state.install_id=global.install.install_id
+  this.state.install_id=global.install.install_id
     this.setState({isloading:true})
-
   fetch('https://zuku-backend.herokuapp.com/update installations',
   {
     method: 'POST',
     body: JSON.stringify(this.state),
     headers: {
-      'content-type': 'application/json'
+      'Content-Type': 'application/json'
     }
   })
   .then(
    response => response.json()
-  ).then(data=>[global.install=data,alert(JSON.stringify(global.install)),
-    this.props.navigation.navigate("Charges"),this.setState({isloading:false})]) 
+  ).then(()=>[
+    this.setState({isloading:false}),
+    this.props.navigation.navigate("Charges")])
+
 }
 
     handleApartNo = (apart_no)=>{this.setState({apart_no})}
@@ -64,14 +66,14 @@ handleSubmit = ()=>{
         <TextInput value = {this.state.estate} placeholder='Estate or Building' style={styles.inputs} onChangeText={this.handleEstate}/><Text></Text>
         <TextInput value = {this.state.address} placeholder='Address' style={styles.inputs} onChangeText = {this.handleAddress}/><Text></Text>
 
-      <View   style={{width:'40%',backgroundColor:"#397", alignSelf: 'center', padding:20, borderRadius:10,}} >
-        <TouchableOpacity onPress={()=>this.handleSubmit()}>
-            <View ><Text style={{textAlign:'center'}}>Submit</Text></View>
+      
+        <TouchableOpacity style={styles.submitClient} onPress={()=>this.handleSubmit()}>
+            <View ><Text style={{textAlign:'center',marginTop:10}}>Submit</Text></View>
             </TouchableOpacity>
         </View>
-        </View>
+
         :
-        <ActivityIndicator size="large"/>}
+        <ActivityIndicator size="100%"/>}
       </ScrollView>
       );}
 }

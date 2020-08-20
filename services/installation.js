@@ -1,7 +1,8 @@
 import React from 'react'
 import {styles} from '../styles'
-import {View, TouchableOpacity, Text, List, ListItem, Alert} from 'react-native'
+import {View, TouchableOpacity, Text, List, ListItem, Alert, ActivityIndicator} from 'react-native'
 import { FlatGrid } from 'react-native-super-grid';
+import { ceil } from 'react-native-reanimated';
 
 export default class App extends React.Component{
 
@@ -21,6 +22,8 @@ export default class App extends React.Component{
                 {this.state.instals.push({...item})}}),
                 this.setState({isLoading:false})
             ])
+            .catch(()=>[this.setState({isloading:false}),
+                alert("Please check internet connection and try again")])
     }
 
     handlePayment = ()=>{
@@ -29,8 +32,24 @@ export default class App extends React.Component{
     render() {
         return (
          
+
             <View  style={styles.container}>
+                {this.state.isLoading==true ? <ActivityIndicator size="100%"/> :
+                <View>
+
+            {this.state.instals.length===0 ? 
+            <View style={{alignItems:"center",
+            marginTop:"40%",
+            alignSelf:"center"}}>
+            <Text style={{textAlign:"center"}}>You haven't applied for any service{"\n"}</Text>
+            <TouchableOpacity onPress={()=>this.props.navigation.navigate('Services')}> 
+
+                <Text style={{backgroundColor:"#357",height:40,textAlignVertical:"center",width:150,textAlign:"center"}}>
+                    Apply from here
+                </Text>
+            </TouchableOpacity>
             
+            </View>:
           <FlatGrid
             itemDimension={170}
             data={this.state.instals}
@@ -40,8 +59,8 @@ export default class App extends React.Component{
                     this.state.band=m.band
                     this.state.package=m.package
                     this.state.amount=m.amount
-                    global.instals={'band':m.band,'package':m.package,
-                    'amount':m.amount,'address':item.address, 'code':m.code,
+                    global.install={'band':m.band,'package':m.package,
+                    'amount':m.amount,'address':item.address, 'code':item.code,
                 'floor':item.floor,'apart_no':item.apart_no}
                 }
             }),
@@ -51,7 +70,7 @@ export default class App extends React.Component{
                 <Text style={{ textAlign:"left", fontSize:20,margin:10,color:'#222'}}>
 
                     {this.state.package+"\n"+'in '+item.address+"\n" +'At '+item.estate+'\n'
-                    +'on the'+item.floor+"th Floor"}
+                    +'on the '+item.floor+"th Floor"}
                     </Text>
                     <TouchableOpacity onPress={this.handlePayment}
                     style={{width:"80%",alignSelf:"center",
@@ -63,7 +82,8 @@ export default class App extends React.Component{
               </View>
              
             )}
-          />
+          />}
+          </View>}
           </View>
           )}
     

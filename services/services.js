@@ -16,13 +16,16 @@ componentDidMount() {
       .then((json) => [this.setState({services:json.services,isLoading: false,})
           ,json.clients.forEach(item=>{if(item.username===global.user){[this.setState(({...item})),
           global.services=this.state]}})])
-      .catch((error) => console.error(error))   
+          .catch(()=>[this.setState({isloading:false}),
+            alert("Please check internet connection and try again")])
+
+          
 }
 
   render() {  
     return (
       <View  style={styles.container}>
-              {this.state.isLoading ? <ActivityIndicator /> :
+               {this.state.isLoading ? <ActivityIndicator size="100%"/> :
       (
        <View>
 
@@ -57,7 +60,8 @@ componentDidMount() {
       </View>
       )}
 
-    </View>
+</View>
+
 
       );
   }

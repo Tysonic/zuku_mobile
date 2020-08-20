@@ -9,6 +9,7 @@ export default class Example extends Component {
 logOutHandler = ()=>{
   fetch('https://zuku-backend.herokuapp.com/.logout user')
   this.props.navigation.navigate('Login')
+  
   global.user=undefined
 }
 
@@ -31,7 +32,7 @@ showAlert=()=> {
   render() {
     const items = [
       { name: 'Services', code: ()=>this.props.navigation.navigate("Services"), image:require('./assets/service2.jpeg')  },
-      { name: 'Profile', code: ()=>this.props.navigation.navigate("Clients"), image:require('./assets/profile.png') },
+      { name: 'Profile', code: ()=>this.props.navigation.navigate("Profile"), image:require('./assets/profile.png') },
       { name: 'My Connections', code:()=> this.props.navigation.navigate("Installation"), image:require('./assets/installation.png') },
       { name: 'Payments', code:()=> [alert("Please select a service to pay for!"),this.props.navigation.navigate("Installation")], image:require('./assets/charges.png')  },
       { name: 'About Us',code:()=> this.props.navigation.navigate("AboutUs"), image:require('./assets/About.jpeg')  },
@@ -42,15 +43,7 @@ showAlert=()=> {
     
  
     return (
-      <View  style={styles.container}>
-        
-        <View>
-        <TouchableOpacity style={styles.logout} onPress={this.showAlert}>
-          <Text>Logout</Text>
-        </TouchableOpacity>
-        </View>
-
-
+      <View  style={styles.container}>       
       <SectionGrid
         itemDimension={160}
         sections={[
@@ -76,6 +69,10 @@ showAlert=()=> {
             </View>
           </TouchableOpacity>)}
       />
+
+<TouchableOpacity style={styles.logout} onPress={this.showAlert}>
+          <Text style={{fontSize:20}}>Logout</Text>
+        </TouchableOpacity>
       </View>
     );
   }

@@ -8,11 +8,6 @@ export default class App extends React.Component{
         return(
             <ScrollView  style={styles.container}>
                         
-                <View style={styles.logout}>
-                    <TouchableOpacity style={styles.submitButton} onPress={()=>this.props.navigation.navigate("Home")}>
-                    <Text>Back To Home</Text>
-                    </TouchableOpacity>
-                </View>
                 <Text>
 
                 Consectetur nostrud cupidatat consequat elit et ea enim enim amet mollit voluptate sint eiusmod. Esse mollit irure irure aute exercitation reprehenderit sint minim Lorem commodo laborum do. Anim cillum adipisicing ea enim nisi velit sit quis Lorem irure magna. Sit dolore et nostrud anim ea est eiusmod reprehenderit non cupidatat. Sit velit quis eu ea aliqua tempor est labore amet esse amet non. Non proident amet mollit eiusmod dolor anim veniam deserunt velit est consectetur.
