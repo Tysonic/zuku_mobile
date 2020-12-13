@@ -24,6 +24,7 @@ export default class App extends React.Component{
 
                 <View style={{ backgroundColor: '#9bc', marginTop:'10%', borderRadius:50,height:'80%',alignItems:"center",}}>                    
                 <Text style={{ fontSize:20,textAlign:"center"}}>
+                
                 {'\n'}{'\n'}
                     Hello dear, {global.user}{'\n'}
                     you have applied for{'\n'}
@@ -33,6 +34,7 @@ export default class App extends React.Component{
                      Note! Installation shall take place in 48 hours from time of payment{'\n'}
                      {'\n'}
                      Enjoy first speed internet{'\n'}{'\n'}
+                     
                      
                 </Text>
 
@@ -48,11 +50,7 @@ export default class App extends React.Component{
                     </Text>
                     </Text>
                     </TouchableOpacity>
-
-                
                 </View>
-                
-                
             </View>
         )
     }

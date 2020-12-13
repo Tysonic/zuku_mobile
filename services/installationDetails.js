@@ -40,7 +40,7 @@ handleSubmit = ()=>{
    response => response.json()
   ).then(()=>[
     this.setState({isloading:false}),
-    this.props.navigation.navigate("Charges")])
+    this.props.navigation.navigate("Installation")])
 
 }
 

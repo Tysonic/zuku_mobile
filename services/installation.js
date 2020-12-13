@@ -8,7 +8,7 @@ export default class App extends React.Component{
 
     state = {
         isLoading:true,
-        instals:[]
+        install:[]
     }
     componentDidMount(){
         fetch("https://zuku-backend.herokuapp.com/installation details")
@@ -19,14 +19,16 @@ export default class App extends React.Component{
                 res.client.forEach(element => {if(element.username===global.user)
                 {this.setState({...this.state,...element})}}),
                 res.installation.forEach(item=>{if(item.client===this.state.client_id)
-                {this.state.instals.push({...item})}}),
+                {this.state.install.push({...item})}}),
                 this.setState({isLoading:false})
             ])
             .catch(()=>[this.setState({isloading:false}),
                 alert("Please check internet connection and try again")])
+                
     }
 
     handlePayment = ()=>{
+        global.install=this.state
         this.props.navigation.navigate('Charges')
     }
     render() {
@@ -37,7 +39,7 @@ export default class App extends React.Component{
                 {this.state.isLoading==true ? <ActivityIndicator size="100%"/> :
                 <View>
 
-            {this.state.instals.length===0 ? 
+            {this.state.install.length===0 ? 
             <View style={{alignItems:"center",
             marginTop:"40%",
             alignSelf:"center"}}>
@@ -52,18 +54,10 @@ export default class App extends React.Component{
             </View>:
           <FlatGrid
             itemDimension={170}
-            data={this.state.instals}
+            data={this.state.install}
     
             renderItem={({ item, index }) => (
-                this.state.service.forEach(m=>{if(item.service===m.service_id){
-                    this.state.band=m.band
-                    this.state.package=m.package
-                    this.state.amount=m.amount
-                    global.install={'band':m.band,'package':m.package,
-                    'amount':m.amount,'address':item.address, 'code':item.code,
-                'floor':item.floor,'apart_no':item.apart_no}
-                }
-            }),
+
               
             
               <View style={styles.serviceContainer}>
@@ -72,13 +66,13 @@ export default class App extends React.Component{
                     {this.state.package+"\n"+'in '+item.address+"\n" +'At '+item.estate+'\n'
                     +'on the '+item.floor+"th Floor"}
                     </Text>
-                    <TouchableOpacity onPress={this.handlePayment}
+                    <Text
                     style={{width:"80%",alignSelf:"center",
                     alignItems:"center",backgroundColor:'#365',marginBottom:0}}>
                         <Text style={{fontSize:20}}>
-                            Proceed to payments
+                            Payment code: {item.code}
                         </Text>
-                    </TouchableOpacity>
+                    </Text>
               </View>
              
             )}
