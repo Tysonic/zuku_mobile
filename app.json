@@ -2,11 +2,11 @@
   "expo": {
     "name": "zuku_mobile",
     "slug": "zuku_mobile",
-    "android":{
-      "package":"com.johncy.myapp",
-       "versionCode":1 , 
-       "icon":"./assets/zuku_icon.png"
-           },
+    "android": {
+      "package": "com.johncy.myapp",
+      "versionCode": 1,
+      "icon": "./assets/zuku_icon.png"
+    },
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/zuku_icon.png",
@@ -22,7 +22,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "zuku"
     },
     "web": {
       "favicon": "./assets/favicon.png"
